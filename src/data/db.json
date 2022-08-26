@@ -1,0 +1,46 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "React Blog 1",
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit at cumque, reprehenderit beatae error vel hic velit? Ratione sequi unde harum itaque dicta consequatur, animi nostrum a dolorem, quo illum!",
+      "author": "Huy"
+    },
+    {
+      "id": 2,
+      "title": "React Blog 2",
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit at cumque, reprehenderit beatae error vel hic velit? Ratione sequi unde harum itaque dicta consequatur, animi nostrum a dolorem, quo illum!",
+      "author": "Huy"
+    },
+    {
+      "id": 3,
+      "title": "React Blog 3",
+      "body": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit at cumque, reprehenderit beatae error vel hic velit? Ratione sequi unde harum itaque dicta consequatur, animi nostrum a dolorem, quo illum!",
+      "author": "Huy"
+    },
+    {
+      "title": "Rules of Hooks",
+      "body": "Don’t call Hooks inside loops, conditions, or nested functions. Instead, always use Hooks at the top level of your React function, before any early returns. By following this rule, you ensure that Hooks are called in the same order each time a component renders. That’s what allows React to correctly preserve the state of Hooks between multiple useState and useEffect calls. (If you’re curious, we’ll explain this in depth below.)",
+      "author": "Huy",
+      "id": 4
+    },
+    {
+      "title": "eslint-plugin-react-hooks",
+      "body": "We suggest to use this option very sparingly, if at all. Generally saying, we recommend most custom Hooks to not use the dependencies argument, and instead provide a higher-level API that is more focused around a specific use case.",
+      "author": "Nguyen Thanh Huy",
+      "id": 5
+    },
+    {
+      "title": "Using the Effect Hook",
+      "body": "Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. Whether or not you’re used to calling these operations “side effects” (or just “effects”), you’ve likely performed them in your components before.",
+      "author": "Thanh Huy",
+      "id": 6
+    },
+    {
+      "title": "Transition Property",
+      "body": "Utilities for controlling which CSS properties transition.",
+      "author": "Nguyen Thanh Huy",
+      "id": 7
+    }
+  ]
+}

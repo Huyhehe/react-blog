@@ -1,0 +1,31 @@
+.blog-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 0;
+  &-item {
+    display: flex;
+    box-sizing: border-box;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px;
+    color: #a4a4a4;
+    gap: 10px;
+    width: 100%;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    cursor: pointer;
+    &:hover {
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+      color: black;
+    }
+    &-title {
+      font-size: 1.5rem;
+      color: #61dbfb;
+    }
+    &-body {
+      font-size: 1.2rem;
+    }
+  }
+}

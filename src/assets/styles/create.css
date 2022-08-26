@@ -1,0 +1,61 @@
+.create {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.create h2 {
+  display: inline-block;
+  color: #00ccff;
+}
+.create .container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.create .container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  width: 50%;
+}
+.create .container form .input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.create .container form .input-box input,
+.create .container form .input-box select,
+.create .container form .input-box textarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  background-color: transparent;
+  outline: none;
+}
+.create .container form .input-box input:focus,
+.create .container form .input-box select:focus,
+.create .container form .input-box textarea:focus {
+  border-color: #61dbfb;
+}
+.create .container form .input-box textarea {
+  min-height: 5rem;
+  min-width: 100%;
+  max-height: 10rem;
+  max-width: 100%;
+}
+.create .container form button {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  background-color: #00ccff;
+  color: white;
+  border: none;
+  border-radius: 0.2rem;
+  margin: auto;
+  cursor: pointer;
+}
+.create .container form button:hover {
+  background-color: #61dbfb;
+}/*# sourceMappingURL=create.css.map */

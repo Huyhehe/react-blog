@@ -1,0 +1,50 @@
+.container {
+  width: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(90% - 1px);
+}
+.container-form {
+  border: 1px solid #d4d4d4;
+  border-radius: 5px;
+  width: 400px;
+  height: 500px;
+  text-align: center;
+}
+.container-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.container-form-body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+.container-form-body-input input {
+  width: 15rem;
+  height: 2rem;
+  font-size: 1rem;
+  padding-left: 1rem;
+  outline: none;
+}
+.container-form-button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.container-form-button-item {
+  width: 65%;
+  font-size: 1rem;
+  padding: 0.3rem;
+  box-sizing: border-box;
+  background-color: transparent;
+  border: 1px solid black;
+  border-radius: 10px;
+  cursor: pointer;
+}/*# sourceMappingURL=login.css.map */

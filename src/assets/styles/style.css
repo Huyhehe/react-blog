@@ -1,0 +1,7 @@
+@import "./home.css";
+@import "./links.css";
+@import "./login.css";
+@import "./create.css";
+body {
+  padding: 0 15%;
+}
