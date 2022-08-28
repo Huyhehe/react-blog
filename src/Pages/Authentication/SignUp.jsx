@@ -88,6 +88,15 @@ const SignUp = () => {
           >
             Sign up
           </button>
+          <div className="self-start flex gap-2">
+            <span>Don't have account?</span>
+            <button
+              className="font-bold hover:underline"
+              onClick={() => navigate("/signUp")}
+            >
+              Sign in
+            </button>
+          </div>
         </form>
       </div>
     </>
