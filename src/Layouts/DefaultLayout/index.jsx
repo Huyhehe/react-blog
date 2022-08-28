@@ -1,5 +1,4 @@
 import axios from "axios";
-import { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +9,6 @@ const DefaultLayout = ({ children }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user?.user);
-  const [loading, setLoading] = useState(false);
   const URL = `${process.env.REACT_APP_API_URL}/auth/checkToken`;
   const logoutURL = `${process.env.REACT_APP_API_URL}/auth/logout`;
 
@@ -67,14 +65,12 @@ const DefaultLayout = ({ children }) => {
   return (
     <div className="px-[15%] relative">
       <Navbar title={title} links={links} logout={logout} />
-      <div className="wrapper" setLoading={setLoading}>
-        {children}
-      </div>
-      {loading && (
+      <div className="wrapper">{children}</div>
+      {/* {loading && (
         <div className="loading-demo absolute top-0 left-0 w-full h-full">
           <div className="loading-circle w-[5rem] aspect-square border-[10px] border-t-cyan-400 rounded-full animate-spin"></div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

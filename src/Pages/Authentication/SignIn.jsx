@@ -54,6 +54,10 @@ const SignIn = () => {
           >
             Sign in
           </button>
+          <div className="self-start flex gap-2">
+            <span>Don't have account?</span>
+            <button className="font-bold hover:underline">Sign in</button>
+          </div>
         </form>
       </div>
     </>
