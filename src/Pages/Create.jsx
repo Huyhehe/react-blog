@@ -8,7 +8,7 @@ const Create = () => {
   const [content, setContent] = useState("");
   const [isPending, setIsPending] = useState(false);
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user?.user);
   const url = `${process.env.REACT_APP_API_URL}/blogs/add`;
 
   const submit = (e) => {
@@ -16,7 +16,7 @@ const Create = () => {
     const newBlog = {
       title,
       content,
-      authorID: user._id,
+      authorID: user?._id,
     };
 
     setIsPending(true);
@@ -24,7 +24,7 @@ const Create = () => {
       try {
         const res = await axios.post(url, newBlog, {
           headers: {
-            authorized: `bearer ${user.accessToken}`,
+            authorized: `bearer ${user?.accessToken}`,
           },
         });
         console.log(res);

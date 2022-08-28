@@ -1,19 +1,52 @@
-// import { useState } from "react";
+import axios from "axios";
+import { useState } from "react";
 import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "~/components/Navbar";
+import { setUser } from "~/redux/userSlice";
 
 const DefaultLayout = ({ children }) => {
-  // const [isAuthenticated, setAuthenticated] = useState(true);
   const navigate = useNavigate();
-  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user?.user);
+  const [loading, setLoading] = useState(false);
+  const URL = `${process.env.REACT_APP_API_URL}/auth/checkToken`;
+  const logoutURL = `${process.env.REACT_APP_API_URL}/auth/logout`;
 
   useEffect(() => {
     if (user == null) {
       navigate("/signIn");
+    } else {
+      setTimeout(async () => {
+        try {
+          const res = await axios.post(
+            URL,
+            {},
+            {
+              headers: {
+                authorized: `bearer ${user?.accessToken}`,
+              },
+            }
+          );
+          console.log(res.data);
+        } catch (error) {
+          logout();
+        }
+      });
     }
   });
+
+  const logout = async () => {
+    try {
+      const res = await axios.post(logoutURL);
+      console.log(res);
+      dispatch(setUser(null));
+      navigate("/signIn");
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const title = "React Blogs";
   let links = [
@@ -31,14 +64,18 @@ const DefaultLayout = ({ children }) => {
     },
   ];
 
-  // if (!isAuthenticated) {
-  //   links = links.filter((link) => link.path !== "/create");
-  // }
   return (
-    <>
-      <Navbar title={title} links={links} />
-      <div className="wrapper">{children}</div>
-    </>
+    <div className="px-[15%] relative">
+      <Navbar title={title} links={links} logout={logout} />
+      <div className="wrapper" setLoading={setLoading}>
+        {children}
+      </div>
+      {loading && (
+        <div className="loading-demo absolute top-0 left-0 w-full h-full">
+          <div className="loading-circle w-[5rem] aspect-square border-[10px] border-t-cyan-400 rounded-full animate-spin"></div>
+        </div>
+      )}
+    </div>
   );
 };
 

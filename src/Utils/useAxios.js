@@ -3,7 +3,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 const User = () => {
-  const user = useSelector((state) => state.user.user);
+  const user = useSelector((state) => state.user?.user);
   return user;
 };
 
@@ -17,7 +17,7 @@ const useGet = (url) => {
       try {
         const res = await axios.get(url, {
           headers: {
-            authorized: `bearer ${user.accessToken}`,
+            authorized: `bearer ${user?.accessToken}`,
           },
         });
         setData(res.data);
@@ -28,7 +28,7 @@ const useGet = (url) => {
         setError(e.message);
       }
     }, 0);
-  }, [url, user.accessToken]);
+  }, [url, user?.accessToken]);
   return { data, loading, error };
 };
 
@@ -42,7 +42,7 @@ const usePost = (url, payload) => {
       try {
         const res = await axios.post(url, payload, {
           headers: {
-            authorized: `bearer ${user.accessToken}`,
+            authorized: `bearer ${user?.accessToken}`,
           },
         });
         setData(res.data);
@@ -53,7 +53,7 @@ const usePost = (url, payload) => {
         setError(e.message);
       }
     }, 0);
-  }, [url, payload, user.accessToken]);
+  }, [url, payload, user?.accessToken]);
   return { data, loading, error };
 };
 
