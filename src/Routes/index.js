@@ -3,6 +3,7 @@ import Create from "~/Pages/Create";
 import Home from "~/Pages/Home";
 import SingleBlog from "~/Pages/SingleBlog";
 import { UnAuthLayout } from "~/Layouts";
+import Profile from "~/Pages/Profile";
 
 //publicRoutes
 const publicRoutes = [
@@ -12,6 +13,7 @@ const publicRoutes = [
 
 //privateRoutes
 const privateRoutes = [
+  { path: "/profile", component: Profile },
   { path: "/create", component: Create },
   { path: "/singleBlog/:id", component: SingleBlog },
   { path: "/", component: Home },

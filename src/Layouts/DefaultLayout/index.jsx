@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Navbar from "~/components/Navbar";
 import { setUser } from "~/redux/userSlice";
+import { MdKeyboardArrowUp } from "react-icons/md";
 
 const DefaultLayout = ({ children }) => {
   const navigate = useNavigate();
@@ -32,8 +33,20 @@ const DefaultLayout = ({ children }) => {
           logout();
         }
       });
+      window.addEventListener("scroll", () => {
+        const scrollTop = document.querySelector(".scroll-top");
+        if (window.scrollY > 0) {
+          scrollTop.classList.remove("translate-x-[20rem]");
+        } else {
+          scrollTop.classList.add("translate-x-[20rem]");
+        }
+      });
     }
   });
+
+  const handleScrollTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const logout = async () => {
     try {
@@ -63,7 +76,7 @@ const DefaultLayout = ({ children }) => {
   ];
 
   return (
-    <div className="px-[15%] relative">
+    <div className="px-[15%]">
       <Navbar title={title} links={links} logout={logout} />
       <div className="wrapper">{children}</div>
       {/* {loading && (
@@ -71,6 +84,12 @@ const DefaultLayout = ({ children }) => {
           <div className="loading-circle w-[5rem] aspect-square border-[10px] border-t-cyan-400 rounded-full animate-spin"></div>
         </div>
       )} */}
+      <div
+        onClick={handleScrollTop}
+        className="scroll-top fixed bottom-[2rem] right-[2rem] bg-slate-200 rounded-full translate-x-[20rem] transition-all cursor-pointer"
+      >
+        <MdKeyboardArrowUp size={"3em"} />
+      </div>
     </div>
   );
 };

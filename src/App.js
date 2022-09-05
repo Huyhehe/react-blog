@@ -25,7 +25,7 @@ function App() {
                 path={route.path}
                 element={
                   <Layout>
-                    <Page />
+                    <Page title={"React blogs"} />
                   </Layout>
                 }
               />

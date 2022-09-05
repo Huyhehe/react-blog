@@ -28,6 +28,9 @@ const SignIn = () => {
           className="w-[25em] px-[3rem] py-[5rem] shadow-md flex flex-col gap-[1.5rem] items-center"
           onSubmit={(e) => handleFormSubmit(e)}
         >
+          <h1 className="self-start text-[1.5rem] font-black tracking-[0.2rem] uppercase">
+            Sign In
+          </h1>
           <div className="flex flex-col gap-[0.25rem] w-full">
             <label htmlFor="userName" className="font-bold">
               User Name
@@ -60,7 +63,7 @@ const SignIn = () => {
               className="font-bold hover:underline"
               onClick={() => navigate("/signUp")}
             >
-              Sign in
+              Sign up
             </button>
           </div>
         </form>

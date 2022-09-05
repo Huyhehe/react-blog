@@ -48,6 +48,9 @@ const SignUp = () => {
           className="w-[25em] px-[3rem] py-[5rem] shadow-md flex flex-col gap-[1.5rem] items-center"
           onSubmit={(e) => handleFormSubmit(e)}
         >
+          <h1 className="self-start text-[1.5rem] font-black tracking-[0.2rem] uppercase">
+            Sign up
+          </h1>
           {formItems.map((item, index) => {
             return (
               <div key={index} className="flex flex-col gap-[0.25rem] w-full">
@@ -89,13 +92,13 @@ const SignUp = () => {
             Sign up
           </button>
           <div className="self-start flex gap-2">
-            <span>Don't have account?</span>
-            <button
-              className="font-bold hover:underline"
-              onClick={() => navigate("/signUp")}
+            <span>Already have an account?</span>
+            <span
+              className="font-bold hover:underline cursor-pointer"
+              onClick={() => navigate("/signIn")}
             >
               Sign in
-            </button>
+            </span>
           </div>
         </form>
       </div>

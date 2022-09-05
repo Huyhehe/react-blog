@@ -1,9 +1,11 @@
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { FiLogOut } from "react-icons/fi";
+import { HiOutlineUserCircle } from "react-icons/hi";
 const Navbar = (props) => {
   const user = useSelector((state) => state.user?.user);
   // const dispatch = useDispatch();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   // const url = `${process.env.REACT_APP_API_URL}/auth/logout`;
 
   const { title, links, logout } = props;
@@ -11,14 +13,20 @@ const Navbar = (props) => {
   const handleLogout = () => {
     logout();
   };
+  const handleNavigateToProfile = () => {
+    navigate("/profile");
+  };
 
   const dropDownItems = [
     {
       title: "Profile",
+      func: handleNavigateToProfile,
+      icon: <HiOutlineUserCircle />,
     },
     {
       title: "Log out",
       func: handleLogout,
+      icon: <FiLogOut />,
     },
   ];
 
@@ -33,15 +41,16 @@ const Navbar = (props) => {
         ))}
         <div className="group relative">
           <span>Hi, {user?.name}</span>
-          <div className="drop-down z-10 hidden group-hover:flex flex-col absolute top-full left-0 w-full bg-white">
+          <div className="drop-down z-10 hidden group-hover:flex flex-col absolute top-full left-0 w-full bg-white shadow-md">
             {dropDownItems.map((item, index) => {
               return (
                 <div
                   key={index}
-                  className="hover:bg-slate-200 p-[0.5rem] cursor-pointer"
+                  className="flex items-center gap-[0.25rem] hover:bg-slate-200 p-[0.5rem] cursor-pointer"
                   onClick={item.func}
                 >
                   <span>{item.title}</span>
+                  <div>{item.icon}</div>
                 </div>
               );
             })}
