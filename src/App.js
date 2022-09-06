@@ -28,7 +28,23 @@ function App() {
                     <Page title={"React blogs"} />
                   </Layout>
                 }
-              />
+              >
+                {route.childrens &&
+                  route.childrens.map((children, index) => {
+                    const ChildPage = children.component;
+                    return (
+                      <Route
+                        key={index}
+                        path={children.path}
+                        element={
+                          <Layout>
+                            <ChildPage title={"React blogs"} />
+                          </Layout>
+                        }
+                      />
+                    );
+                  })}
+              </Route>
             );
           })}
           {publicRoutes.map((route, index) => {

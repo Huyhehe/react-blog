@@ -3,7 +3,8 @@ import Create from "~/Pages/Create";
 import Home from "~/Pages/Home";
 import SingleBlog from "~/Pages/SingleBlog";
 import { UnAuthLayout, ProfileLayout } from "~/Layouts";
-import Profile from "~/Pages/Profile";
+import Profile from "~/Pages/Profile/Profile";
+import Info from "~/Pages/Profile/Info";
 
 //publicRoutes
 const publicRoutes = [
@@ -13,7 +14,15 @@ const publicRoutes = [
 
 //privateRoutes
 const privateRoutes = [
-  { path: "/profile", component: Profile, layout: ProfileLayout },
+  {
+    path: "/profile",
+    component: Profile,
+    layout: ProfileLayout,
+    childrens: [
+      { path: "info", component: Info, layout: ProfileLayout },
+      { path: "myBlogs", component: Info, layout: ProfileLayout },
+    ],
+  },
   { path: "/create", component: Create },
   { path: "/singleBlog/:id", component: SingleBlog },
   { path: "/", component: Home },

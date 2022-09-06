@@ -1,5 +1,6 @@
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { useSelector } from "react-redux";
+import { NavLink, Outlet } from "react-router-dom";
 
 const Profile = () => {
   const user = useSelector((state) => state.user?.user);
@@ -10,7 +11,7 @@ const Profile = () => {
     },
     {
       title: "My blogs",
-      direction: "/profile/blogs",
+      direction: "blogs",
     },
   ];
 
@@ -36,10 +37,18 @@ const Profile = () => {
         {links.map((link, index) => {
           return (
             <div key={index} className="cursor-pointer">
-              <span className="text-[1.75rem] font-medium">{link.title}</span>
+              <NavLink
+                to={link.direction}
+                className="text-[1.75rem] font-medium"
+              >
+                {link.title}
+              </NavLink>
             </div>
           );
         })}
+      </div>
+      <div>
+        <Outlet />
       </div>
     </div>
   );
