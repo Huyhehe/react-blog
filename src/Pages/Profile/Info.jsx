@@ -13,7 +13,7 @@ const Info = () => {
     },
   ];
   return (
-    <div className="info-container mt-[4em]">
+    <div className="info-container">
       <div className="basic-info border flex flex-col gap-y-[1em] px-[3em] py-[1rem]">
         {basicInfoItems.map((item, index) => {
           return (
