@@ -5,6 +5,7 @@ import SingleBlog from "~/Pages/SingleBlog";
 import { UnAuthLayout, ProfileLayout } from "~/Layouts";
 import Profile from "~/Pages/Profile/Profile";
 import Info from "~/Pages/Profile/Info";
+import MyBlogs from "~/Pages/Profile/MyBlogs";
 
 //publicRoutes
 const publicRoutes = [
@@ -20,7 +21,7 @@ const privateRoutes = [
     layout: ProfileLayout,
     children: [
       { path: "info", component: Info, layout: ProfileLayout },
-      { path: "myBlogs", component: Info, layout: ProfileLayout },
+      { path: "myBlogs", component: MyBlogs, layout: ProfileLayout },
     ],
   },
   { path: "/create", component: Create },

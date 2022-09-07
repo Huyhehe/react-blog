@@ -29,21 +29,20 @@ function App() {
                   </Layout>
                 }
               >
-                {route.children &&
-                  route.children.map((child, index) => {
-                    const ChildPage = child.component;
-                    return (
-                      <Route
-                        key={index}
-                        path={child.path}
-                        element={
-                          <Layout>
-                            <ChildPage title={"React blogs"} />
-                          </Layout>
-                        }
-                      />
-                    );
-                  })}
+                {route.children?.map((child, index) => {
+                  const ChildPage = child.component;
+                  return (
+                    <Route
+                      key={index}
+                      path={child.path}
+                      element={
+                        <Layout>
+                          <ChildPage title={"React blogs"} />
+                        </Layout>
+                      }
+                    />
+                  );
+                })}
               </Route>
             );
           })}

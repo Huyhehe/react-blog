@@ -4,9 +4,9 @@ const BlogList = (props) => {
   const blogList = props.blogList;
   return (
     <div className="flex flex-col gap-5 my-5">
-      {blogList.map((blog) => (
+      {blogList?.map((blog) => (
         <Link
-          to={`singleBlog/${blog._id}`}
+          to={`/singleBlog/${blog._id}`}
           className="flex flex-col gap-2 shadow-md text-gray-400 p-4 hover:shadow-lg hover:text-black transition-all"
           key={blog._id}
         >

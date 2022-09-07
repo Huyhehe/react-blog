@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const blogSlice = createSlice({
-  name: "blog",
+  name: "blogs",
   initialState: {
-    blogList: [],
+    blogList: null,
   },
   reducers: {
     update: (state, action) => {
       if (action.payload != null) {
-        state.blogList = action.payload;
+        return { ...state, blogList: action.payload };
       }
     },
   },
