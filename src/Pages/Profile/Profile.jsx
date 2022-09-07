@@ -1,6 +1,8 @@
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
+import { AiFillHome } from "react-icons/ai";
+import { FiLogOut } from "react-icons/fi";
 
 const Profile = () => {
   const user = useSelector((state) => state.user?.user);
@@ -19,6 +21,16 @@ const Profile = () => {
     active: `underline text-cyan-400 ${baseClassNameForNavbar}`,
     unActive: `${baseClassNameForNavbar}`,
   };
+  const dropDownItems = [
+    {
+      title: "Home",
+      icon: <AiFillHome />,
+    },
+    {
+      title: "Log out",
+      icon: <FiLogOut />,
+    },
+  ];
 
   return (
     <div className="profile-container">
@@ -29,10 +41,20 @@ const Profile = () => {
             <span className="text-[1.25rem]">{user?.name}</span>
           </div>
           <div className="profile-header__toolbox ml-auto">
-            <div className="group flex items-center text-white">
+            <div className="group flex items-center text-white relative">
               <span className="text-[1.5em]">{user?.userName}</span>
               <div className="group-hover:rotate-180 transition-all duration-300">
                 <MdKeyboardArrowUp size={"1.5em"} />
+              </div>
+              <div className="absolute shadow-md w-[120%] -z-[1] opacity-0 bottom-0 left-0 text-black flex flex-col transition-all duration-300 group-hover:translate-y-[110%] group-hover:z-0 group-hover:opacity-100 text-[1.25rem]">
+                {dropDownItems.map((item) => {
+                  return (
+                    <div className="flex gap-2 items-center cursor-pointer px-2 py-2 hover:bg-slate-200 transition-all duration-300">
+                      <span>{item.title}</span>
+                      <div>{item.icon}</div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
@@ -54,7 +76,7 @@ const Profile = () => {
           );
         })}
       </div>
-      <div className="px-[5rem]">
+      <div className="px-[5rem] mt-[4em]">
         <Outlet context={user} />
       </div>
     </div>
