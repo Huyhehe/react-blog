@@ -2,6 +2,12 @@ import { Link } from "react-router-dom";
 
 const BlogList = (props) => {
   const blogList = props.blogList;
+  const truncate = (str, size) => {
+    if (str.length > size) {
+      return `${str.slice(0, size)}...`;
+    }
+    return str;
+  };
   return (
     <div className="flex flex-col gap-5 my-5">
       {blogList?.map((blog) => (
@@ -11,7 +17,9 @@ const BlogList = (props) => {
           key={blog._id}
         >
           <div className="text-2xl text-cyan-400">{blog.title}</div>
-          <div className="blog-list-item-body">{blog.content}</div>
+          <div className="blog-list-item-body">
+            {truncate(blog.content, 500)}
+          </div>
           <div className="blog-list-item-author">Author: {blog.authorName}</div>
         </Link>
       ))}

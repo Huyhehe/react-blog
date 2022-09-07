@@ -14,7 +14,7 @@ const Navbar = (props) => {
     logout();
   };
   const handleNavigateToProfile = () => {
-    navigate("/profile");
+    navigate("/profile/info");
   };
 
   const dropDownItems = [
