@@ -29,13 +29,13 @@ function App() {
                   </Layout>
                 }
               >
-                {route.childrens &&
-                  route.childrens.map((children, index) => {
-                    const ChildPage = children.component;
+                {route.children &&
+                  route.children.map((child, index) => {
+                    const ChildPage = child.component;
                     return (
                       <Route
                         key={index}
-                        path={children.path}
+                        path={child.path}
                         element={
                           <Layout>
                             <ChildPage title={"React blogs"} />

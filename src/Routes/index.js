@@ -18,7 +18,7 @@ const privateRoutes = [
     path: "/profile",
     component: Profile,
     layout: ProfileLayout,
-    childrens: [
+    children: [
       { path: "info", component: Info, layout: ProfileLayout },
       { path: "myBlogs", component: Info, layout: ProfileLayout },
     ],

@@ -11,9 +11,14 @@ const Profile = () => {
     },
     {
       title: "My blogs",
-      direction: "blogs",
+      direction: "myBlogs",
     },
   ];
+  const baseClassNameForNavbar = "text-[1.75rem] font-medium";
+  const navbarClassNames = {
+    active: `underline text-cyan-400 ${baseClassNameForNavbar}`,
+    unActive: `${baseClassNameForNavbar}`,
+  };
 
   return (
     <div className="profile-container">
@@ -39,7 +44,9 @@ const Profile = () => {
             <div key={index} className="cursor-pointer">
               <NavLink
                 to={link.direction}
-                className="text-[1.75rem] font-medium"
+                className={({ isActive }) =>
+                  isActive ? navbarClassNames.active : navbarClassNames.unActive
+                }
               >
                 {link.title}
               </NavLink>
@@ -47,8 +54,8 @@ const Profile = () => {
           );
         })}
       </div>
-      <div>
-        <Outlet />
+      <div className="px-[5rem]">
+        <Outlet context={user} />
       </div>
     </div>
   );
