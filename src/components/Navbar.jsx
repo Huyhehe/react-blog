@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { FiLogOut } from "react-icons/fi";
 import { HiOutlineUserCircle } from "react-icons/hi";
 const Navbar = (props) => {
@@ -13,14 +13,13 @@ const Navbar = (props) => {
   const handleLogout = () => {
     logout();
   };
-  const handleNavigateToProfile = () => {
-    navigate("/profile/info");
-  };
 
   const dropDownItems = [
     {
       title: "Profile",
-      func: handleNavigateToProfile,
+      func: () => {
+        navigate("/profile/info");
+      },
       icon: <HiOutlineUserCircle />,
     },
     {
@@ -36,7 +35,14 @@ const Navbar = (props) => {
       <div className="flex text-xl gap-4">
         {links.map((link, index) => (
           <div className="text-gray-500 hover:text-black" key={index}>
-            <Link to={link.path}>{link.title}</Link>
+            <NavLink
+              style={({ isActive }) =>
+                isActive ? { color: "black", fontWeight: "bold" } : undefined
+              }
+              to={link.path}
+            >
+              {link.title}
+            </NavLink>
           </div>
         ))}
         <div className="group relative">
