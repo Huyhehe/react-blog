@@ -1,10 +1,12 @@
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { useSelector } from "react-redux";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
 import { FiLogOut } from "react-icons/fi";
 
 const Profile = () => {
+  const navigate = useNavigate();
+
   const user = useSelector((state) => state.user?.user);
   const links = [
     {
@@ -25,6 +27,9 @@ const Profile = () => {
     {
       title: "Home",
       icon: <AiFillHome />,
+      func: () => {
+        navigate("/");
+      },
     },
     {
       title: "Log out",
@@ -47,9 +52,13 @@ const Profile = () => {
                 <MdKeyboardArrowUp size={"1.5em"} />
               </div>
               <div className="absolute shadow-md w-[120%] -z-[1] opacity-0 bottom-0 left-0 text-black flex flex-col transition-all duration-300 group-hover:translate-y-[110%] group-hover:z-0 group-hover:opacity-100 text-[1.25rem]">
-                {dropDownItems.map((item) => {
+                {dropDownItems.map((item, index) => {
                   return (
-                    <div className="flex gap-2 items-center cursor-pointer px-2 py-2 hover:bg-slate-200 transition-all duration-300">
+                    <div
+                      key={index}
+                      className="flex gap-2 items-center cursor-pointer px-2 py-2 hover:bg-slate-200 transition-all duration-300"
+                      onClick={item.func}
+                    >
                       <span>{item.title}</span>
                       <div>{item.icon}</div>
                     </div>
