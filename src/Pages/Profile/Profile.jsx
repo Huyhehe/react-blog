@@ -2,12 +2,19 @@ import { MdKeyboardArrowUp } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { AiFillHome } from "react-icons/ai";
-import { FiLogOut } from "react-icons/fi";
+import { FiLogOut, FiEdit } from "react-icons/fi";
+import { IoMdDoneAll } from "react-icons/io";
+import { useRef } from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Profile = () => {
   const navigate = useNavigate();
+  const filePicker = useRef();
 
   const user = useSelector((state) => state.user?.user);
+  const [selectedPic, setSelectedPic] = useState("");
+  const [isEditing, setEditing] = useState(false);
   const links = [
     {
       title: "Information",
@@ -36,12 +43,42 @@ const Profile = () => {
       icon: <FiLogOut />,
     },
   ];
+  const handleEditAvatar = () => {
+    if (filePicker.current.files && filePicker.current.files[0]) {
+      setSelectedPic(URL.createObjectURL(filePicker.current.files[0]));
+      setEditing(true);
+    }
+  };
 
   return (
     <div className="profile-container">
       <div className="profile-header flex justify-between mb-[10rem]">
         <div className="profile-header__bgBar h-[90px] w-full bg-black relative px-[5rem] flex items-end gap-4">
-          <div className="profile-header__avatar relative top-[100%] w-[170px] rounded-full aspect-square bg-slate-100"></div>
+          <div className="profile-header__avatar relative top-[100%] w-[170px] rounded-full aspect-square bg-slate-100">
+            <img
+              src={selectedPic}
+              alt="avatar"
+              className="w-full h-full rounded-full"
+            />
+            <div
+              className="avatar-editButton absolute bottom-0 right-0 cursor-pointer"
+              onClick={() => {
+                filePicker.current.click();
+              }}
+            >
+              {isEditing ? (
+                <IoMdDoneAll size={"1.5em"} />
+              ) : (
+                <FiEdit size={"1.5em"} />
+              )}
+              <input
+                type="file"
+                className="hidden"
+                ref={filePicker}
+                onChange={handleEditAvatar}
+              />
+            </div>
+          </div>
           <div className="text-white">
             <span className="text-[1.25rem]">{user?.name}</span>
           </div>
