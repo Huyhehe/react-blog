@@ -1,12 +1,10 @@
+import { useRef, useState } from "react";
+import { AiFillHome } from "react-icons/ai";
+import { FiEdit, FiLogOut } from "react-icons/fi";
+import { IoMdDoneAll } from "react-icons/io";
 import { MdKeyboardArrowUp } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { AiFillHome } from "react-icons/ai";
-import { FiLogOut, FiEdit } from "react-icons/fi";
-import { IoMdDoneAll } from "react-icons/io";
-import { useRef } from "react";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const Profile = () => {
   const navigate = useNavigate();
