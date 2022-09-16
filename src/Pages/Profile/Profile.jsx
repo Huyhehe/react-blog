@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useRef, useState } from "react";
 import { AiFillHome } from "react-icons/ai";
 import { FiEdit, FiLogOut } from "react-icons/fi";
@@ -11,7 +12,7 @@ const Profile = () => {
   const filePicker = useRef();
 
   const user = useSelector((state) => state.user?.user);
-  const [selectedPic, setSelectedPic] = useState("");
+  const [previewSource, setPreviewSource] = useState("");
   const [isEditing, setEditing] = useState(false);
   const links = [
     {
@@ -28,6 +29,7 @@ const Profile = () => {
     active: `underline text-cyan-400 ${baseClassNameForNavbar}`,
     unActive: `${baseClassNameForNavbar}`,
   };
+  const uploadLink = `${process.env.REACT_APP_API_URL}/users/uploadImage`;
   const dropDownItems = [
     {
       title: "Home",
@@ -43,8 +45,29 @@ const Profile = () => {
   ];
   const handleEditAvatar = () => {
     if (filePicker.current.files && filePicker.current.files[0]) {
-      setSelectedPic(URL.createObjectURL(filePicker.current.files[0]));
+      previewAvatar(filePicker.current.files[0]);
       setEditing(true);
+    }
+  };
+  const previewAvatar = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+      console.log(reader.result);
+    };
+  };
+
+  const handleSubmitAvatar = async () => {
+    try {
+      const res = await axios.post(uploadLink, previewSource, {
+        headers: {
+          authorized: `bearer ${user.accessToken}`,
+        },
+      });
+      console.log(res);
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -54,28 +77,33 @@ const Profile = () => {
         <div className="profile-header__bgBar h-[90px] w-full bg-black relative px-[5rem] flex items-end gap-4">
           <div className="profile-header__avatar relative top-[100%] w-[170px] rounded-full aspect-square bg-slate-100">
             <img
-              src={selectedPic}
+              src={previewSource}
               alt="avatar"
               className="w-full h-full rounded-full"
             />
-            <div
-              className="avatar-editButton absolute bottom-0 right-0 cursor-pointer"
-              onClick={() => {
-                filePicker.current.click();
-              }}
-            >
-              {isEditing ? (
+            {isEditing ? (
+              <div
+                className="avatar-editButton absolute bottom-0 right-0 cursor-pointer hover:text-cyan-400"
+                onClick={handleSubmitAvatar}
+              >
                 <IoMdDoneAll size={"1.5em"} />
-              ) : (
+              </div>
+            ) : (
+              <div
+                className="avatar-editButton absolute bottom-0 right-0 cursor-pointer hover:text-cyan-400"
+                onClick={() => {
+                  filePicker.current.click();
+                }}
+              >
                 <FiEdit size={"1.5em"} />
-              )}
-              <input
-                type="file"
-                className="hidden"
-                ref={filePicker}
-                onChange={handleEditAvatar}
-              />
-            </div>
+              </div>
+            )}
+            <input
+              type="file"
+              className="hidden"
+              ref={filePicker}
+              onChange={handleEditAvatar}
+            />
           </div>
           <div className="text-white">
             <span className="text-[1.25rem]">{user?.name}</span>
