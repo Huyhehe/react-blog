@@ -4,14 +4,16 @@ import { AiFillHome } from "react-icons/ai";
 import { FiEdit, FiLogOut } from "react-icons/fi";
 import { IoMdDoneAll } from "react-icons/io";
 import { MdKeyboardArrowUp } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { setUser } from "~/redux/userSlice";
 
 const Profile = () => {
   const navigate = useNavigate();
   const filePicker = useRef();
 
   const user = useSelector((state) => state.user?.user);
+  const dispatch = useDispatch();
   const [previewSource, setPreviewSource] = useState("");
   const [isEditing, setEditing] = useState(false);
   const links = [
@@ -29,7 +31,19 @@ const Profile = () => {
     active: `underline text-cyan-400 ${baseClassNameForNavbar}`,
     unActive: `${baseClassNameForNavbar}`,
   };
+  const logoutURL = `${process.env.REACT_APP_API_URL}/auth/logout`;
   const uploadLink = `${process.env.REACT_APP_API_URL}/users/uploadImage`;
+
+  const logout = async () => {
+    try {
+      const res = await axios.post(logoutURL);
+      console.log(res);
+      dispatch(setUser(null));
+      navigate("/signIn");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const dropDownItems = [
     {
       title: "Home",
@@ -41,6 +55,7 @@ const Profile = () => {
     {
       title: "Log out",
       icon: <FiLogOut />,
+      func: logout,
     },
   ];
   const handleEditAvatar = () => {
