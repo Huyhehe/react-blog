@@ -13,26 +13,28 @@ const DefaultLayout = ({ children }) => {
   const URL = `${process.env.REACT_APP_API_URL}/auth/checkToken`;
   const logoutURL = `${process.env.REACT_APP_API_URL}/auth/logout`;
 
+  const checkValidUserUsing = async () => {
+    try {
+      const res = await axios.post(
+        URL,
+        {},
+        {
+          headers: {
+            authorized: `bearer ${user?.accessToken}`,
+          },
+        }
+      );
+      console.log(res.data);
+    } catch (error) {
+      logout();
+    }
+  };
+
   useEffect(() => {
     if (user == null) {
       navigate("/signIn");
     } else {
-      setTimeout(async () => {
-        try {
-          const res = await axios.post(
-            URL,
-            {},
-            {
-              headers: {
-                authorized: `bearer ${user?.accessToken}`,
-              },
-            }
-          );
-          console.log(res.data);
-        } catch (error) {
-          logout();
-        }
-      });
+      checkValidUserUsing();
       window.addEventListener("scroll", () => {
         const scrollTop = document.querySelector(".scroll-top");
         if (window.scrollY > 0) {

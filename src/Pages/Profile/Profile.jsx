@@ -66,6 +66,7 @@ const Profile = () => {
         },
       });
       console.log(res);
+      console.log(typeof previewSource);
     } catch (error) {
       console.error(error);
     }
