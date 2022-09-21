@@ -5,6 +5,12 @@ import { useNavigate } from "react-router-dom";
 import Navbar from "~/components/Navbar";
 import { setUser } from "~/redux/userSlice";
 import { MdKeyboardArrowUp } from "react-icons/md";
+import Notification from "~/components/Notification";
+import {
+  updateCondition,
+  updateMessage,
+  updateStatus,
+} from "~/redux/notificationSlice";
 
 const DefaultLayout = ({ children }) => {
   const navigate = useNavigate();
@@ -48,6 +54,12 @@ const DefaultLayout = ({ children }) => {
 
   const handleScrollTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    dispatch(updateCondition(true));
+    dispatch(updateMessage("Scrolled up successfully"));
+    dispatch(updateStatus(true));
+    setTimeout(() => {
+      dispatch(updateCondition(false));
+    }, 4500);
   };
 
   const logout = async () => {
@@ -78,7 +90,8 @@ const DefaultLayout = ({ children }) => {
   ];
 
   return (
-    <div className="px-[15%]">
+    <div className="px-[15%] relative">
+      <Notification />
       <Navbar title={title} links={links} logout={logout} />
       <div className="wrapper">{children}</div>
       {/* {loading && (
