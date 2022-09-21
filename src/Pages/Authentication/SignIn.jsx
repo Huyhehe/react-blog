@@ -1,6 +1,11 @@
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import {
+  updateCondition,
+  updateMessage,
+  updateStatus,
+} from "~/redux/notificationSlice";
 import { setUser } from "~/redux/userSlice";
 
 const SignIn = () => {
@@ -15,10 +20,22 @@ const SignIn = () => {
     try {
       const res = await axios.post(url, { userName, password });
       dispatch(setUser(res.data));
-      console.log(document.cookie);
+      console.log(res);
       navigate("/");
+      dispatch(updateMessage("Signed in successfully"));
+      dispatch(updateStatus(true));
+      dispatch(updateCondition(true));
+      setTimeout(() => {
+        dispatch(updateCondition(false));
+      }, 4500);
     } catch (error) {
       console.log(error.response.data);
+      dispatch(updateMessage(error.response.data));
+      dispatch(updateStatus(false));
+      dispatch(updateCondition(true));
+      setTimeout(() => {
+        dispatch(updateCondition(false));
+      }, 4500);
     }
   };
   return (
